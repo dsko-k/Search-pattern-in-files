@@ -1,0 +1,401 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <!--
+        Дана таблица с текстом. Дан paragraph с RegExp.
+        1. По нажатию на кнопку, подсветить все слова в колонке таблицы, которые соответствуют RegExp в paragraph
+        2. Предусмотреть экранирование символов, которые распознаются HTML, как символы начала тега или содержимого атрибутов
+    -->
+
+    <style>
+
+        span 
+        {
+            background-color: lime;
+        }
+
+        #table-scroll
+        {
+          height:100px;
+          overflow:auto;  
+          margin-top:20px;
+        }
+
+    </style>
+
+
+    <div>
+
+        <p>Found pattern: <span>123</span> </p>
+        </br>
+
+    </div>
+
+
+    <div id="table-scroll">
+
+        <table border="1" id="idTable">
+
+            <th>Column1</th>
+            <th>Column2</th>
+            <th>Column3</th>
+            <th>Column4</th>
+
+            <tr>
+                <td>text11</td>
+                <td>text12</td>
+                <td>text13</td>
+                <td>text14</td>
+            </tr>
+
+            <tr>
+                <td>text21 </td>
+                <td><span>text22</span></td>
+                <td>&ltspan&gttext22&lt/span&gt</td>
+                <td><span>&ltspan&gttext22&lt/span&gt</span></td>
+            </tr>
+
+            <tr>
+                <td>text31</td>
+                <td>text32</td>
+                <td>text33</td>
+                <td>text34</td>
+            </tr>
+
+            <tr>
+                <td>text41</td>
+                <td>text42</td>
+                <td>text43</td>
+                <td>text44</td>
+            </tr>
+
+            <tr>
+                <td>text51</td>
+                <td>text52</td>
+                <td>text53</td>
+                <td>text54</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+
+        <script>
+
+            let currentRow;
+            let previousRow;
+
+            let indexClickedRow;
+
+
+            function onMouse(colorOnMouse)
+            {
+                let table = document.getElementById("idTable");
+
+                let currentElem = event.target;
+                let tds;
+
+
+                if (currentElem != undefined && currentElem.tagName == "TR") {
+                    tds = currentElem.childNodes;
+                }
+
+                if (currentElem != undefined && currentElem.tagName == "TD") {
+                    tds = currentElem.parentNode.childNodes;
+                }
+
+                if (currentElem != undefined && (currentElem.tagName == "TEXT" | currentElem.tagName == "SPAN")) {
+                    tds = currentElem.parentNode.parentNode.childNodes;
+                }
+
+                if (currentElem != undefined && (currentElem.tagName == "TD" | currentElem.tagName == "TR" | currentElem.tagName == "TEXT" | currentElem.tagName == "SPAN")) {
+
+
+
+                    // function
+                let sibling = event.target.parentNode.previousSibling;
+
+                let clickedRow = 0;
+
+                while (sibling != undefined | sibling != null)
+                {
+                    sibling = sibling.previousSibling;
+                    clickedRow++;
+                }
+
+                // function
+
+                    
+
+                    for (var i = 0; i < tds.length; i++)
+                    {
+                        if (clickedRow != indexClickedRow)
+                        {
+                            if ((tds[i].tagName == "TD" | tds[i].tagName == "TR" | tds[i].tagName == "TEXT" | tds[i].tagName == "SPAN"))
+                            {
+                                tds[i].style.backgroundColor = colorOnMouse; // https://htmlcolorcodes.com/color-chart/
+                            }
+                        }
+                        
+                    }
+
+                }
+            }
+
+
+            function onMouseOver()
+            {                
+                let colorOnMouseOver = "#FFFF99";
+
+                onMouse(colorOnMouseOver);                
+            }
+
+
+            function onMouseOut()
+            {                
+                let colorOnMouseOut = "";
+
+                onMouse(colorOnMouseOut);                                
+            }
+
+
+            
+
+            function onClick()
+            {
+                
+                currentRow = event.target;
+
+                let tds;
+
+                let table = document.getElementById("idTable");
+
+                if (currentRow.tagName == "TR") {
+                    tds = currentRow.childNodes;
+                }
+
+                if (currentRow.tagName == "TD") {
+                    tds = currentRow.parentNode.childNodes;
+                }
+
+                if (currentRow.tagName == "TEXT" | currentRow.tagName == "SPAN") {
+                    tds = currentRow.parentNode.parentNode.childNodes;
+                }
+
+                indexClickedRow = indexRow(this);
+
+                for (let i = 0; i < tds.length; i++)
+                {
+                    if (tds[i].tagName == "TD" | tds[i].tagName == "TR" | tds[i].tagName == "TEXT" | tds[i].tagName == "SPAN")
+                    {
+                        tds[i].style.backgroundColor = "red"; // https://htmlcolorcodes.com/color-chart/
+                    }
+                }
+
+                previousRow = currentRow;
+
+
+                //if (previousRow.tagName == "TR")
+                //{
+                //    tds = previousRow.childNodes;
+                //}
+
+                //if (previousRow.tagName == "TD")
+                //{
+                //    tds = previousRow.parentNode.childNodes;
+                //}
+
+                //if (previousRow.tagName == "TEXT" | currentRow.tagName == "SPAN")
+                //{
+                //    tds = previousRow.parentNode.parentNode.childNodes;
+                //}
+
+
+                //for (let i = 0; i < tds.length; i++)
+                //{
+                //    if (tds[i].tagName == "TD" | tds[i].tagName == "TR" | tds[i].tagName == "TEXT" | tds[i].tagName == "SPAN")
+                //    {
+                //         tds[i].style.backgroundColor = ""; // https://htmlcolorcodes.com/color-chart/
+                //    }
+                //}
+
+            }
+
+
+            function indexRow(elem)
+            {
+                let ind = elem.rowIndex;
+
+                //alert(ind);
+
+                return ind;
+            }
+
+            //function getCurrentRowIndex(tds)
+            //{
+            //    let sibling = tds.parentNode.previousSibling;
+
+            //    let counter = 0;
+
+            //    while (sibling != undefined | sibling != null)
+            //    {
+            //        sibling = tds.parentNode.previousSibling;
+            //        counter++;
+            //    }
+
+            //    return counter;
+            //}
+
+
+
+            function handlerOnMouseOver()
+            {
+                let table = document.getElementById("idTable");
+
+                for (var i = 1; i < table.rows.length; i++)
+                {
+                    if (indexClickedRow != i)
+                    {
+                        table.rows[i].addEventListener('mouseover', onMouseOver);                    
+                    }
+                    else if (indexClickedRow == i)
+                    {
+                        table.rows[i].removeEventListener('mouseover', onMouseOver);    
+
+                    }
+
+                    
+                }
+            }
+
+            function handlerOnMouseOut()
+            {
+                let table = document.getElementById("idTable");
+
+                for (var i = 1; i < table.rows.length; i++)
+                {                    
+                    if (indexClickedRow != i) {
+
+                        table.rows[i].addEventListener('mouseout', onMouseOut);                    
+                    }
+                    else if (indexClickedRow == i)
+                    {
+                        table.rows[i].removeEventListener('mouseout', onMouseOut);           
+                    }
+                }
+            }
+
+            
+
+            function handlerOnClick()
+            {
+                let table = document.getElementById("idTable");
+
+                for (var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].addEventListener('click', onClick);
+                }
+            }
+
+
+            handlerOnClick();
+            handlerOnMouseOver();
+            handlerOnMouseOut();
+
+            
+
+                //function getColumnsTable(idTable, indexColumn)
+                //{
+                //    let table = document.getElementById(idTable);
+
+                //    let columns = [];
+
+                //    for (var i = 1; i < table.rows.length; i++)
+                //    {
+                //        columns.push(table.rows[i].cells[indexColumn].textContent);
+                //    }
+
+
+                //    return columns;
+                //}
+
+
+
+
+                // For editable cells (another task - to rework)
+
+                //function onFocus()
+                //{
+                //    let input = document.createElement('input');
+                //    input.setAttribute("id", "idInput");
+
+
+
+                //    let elem = event.target;
+
+                //    if (elem.tagName == "TD")
+                //    {
+                //        let htmlCell = elem.innerHTML;
+                //        input.value = htmlCell;
+
+                //        elem.textContent = "";
+
+                //        elem.insertAdjacentElement("afterbegin", input);
+                //        input.addEventListener("blur", onBlure);
+                //    }
+
+
+                //    //let input = document.getElementById("idInput");
+                //}
+
+
+                //function onBlure()
+                //{
+                //    let input = document.getElementById("idInput");
+
+                //    let textInput = input.value;
+
+                //    let parent = input.parentNode;
+
+                //    input.remove();
+
+                //    //parent.textContent = textInput;
+                //    parent.innerHTML = textInput;
+                //}
+
+
+                //function handlerInput()
+                //{
+                //    let input = document.getElementById("idInput");
+
+                //    input.addEventListener("blur", onBlure);
+                //}
+
+                //function handlerFocus()
+                //{
+                //    let elem = this;
+
+                //    elem.addEventListener("click", onFocus);
+                //}
+
+
+
+                //handlerInput();
+                //handlerFocus();
+
+
+        </script>
+
+
+
+
+</body>
+</html>
