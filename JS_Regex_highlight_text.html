@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <!--
+        Дан текст и форма для ввода Regex
+        1. Выделить в тексте все слова, соответствующие введённому Regex
+        2. Создать checkboxes для выбора опций поиска по введённому Regex
+    -->
+
+    <style>
+
+        .red {
+            color: red;
+            background: lime;
+        }
+    </style>
+
+    <div id="idDivInputs">
+        <form>
+            <p>Enter your text:</p>
+            <textarea rows="10" cols="60" id="idTextInput" placeholder="Enter text"></textarea>
+            <input type="button" id="idSendTextButton" value="Send text" />
+        </form>
+
+        <br />
+        <p>Enter your regex:</p>
+        <input type="text" id="idRegexInput" placeholder="Enter regex">
+
+        <div id="idCheckboxes">
+            <input type="checkbox" id="idCheckboxFlagI" data-letter="i"  checked />
+            <label for="idCheckboxFlagI">Insensetive case (i)</label>
+
+            <br />
+
+            <input type="checkbox" id="idCheckboxFlagG" data-letter="g" checked  />
+            <label for="">Find all matches (g)</label>
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        /*
+        Действия для пользователя
+         * 
+        1. Вставить текст в форму для добавления текста
+        2. Нажать на добавление текста
+        3. Добавить div с текстом из формы для добавления текста        
+        4. Очистить форму для добавления текста
+        5. Подсветить фон инпута для R с предложением добавить R
+        6. Ввести R        
+        7. Выбрать checkboxes
+        8. "Подсветить" matchings                
+        9. Изменить R
+        10. "Подсветить" matchings
+        11. Изменить checkboxes
+        12. "Подсветить" matchings
+
+
+
+        2. Нажать на добавление текста
+                
+        2.1. Обработчик по нажатию на кнопку добавление текста, создания тега div с текстом из инпута (обработчик ф-ции из 3.1)
+        2.2. Ф-ция очищения текста из формы для ввода текста 
+        2.3. Ф-ция удаления div с текстом из формы для ввода текста, если этот div есть
+
+
+
+        3. Добавить div с текстом из формы для добавления текста
+
+        3.1. Ф-ция по созданию и вставки в документ тега div с текстом из инпута
+
+
+
+        5. Подсветить фон инпута для R с предложением добавить R
+
+        5.1 Ф-ция выделения фона инпута для ввода R и оповещения о необходимости ввести R
+
+
+        6. Ввести R 
+
+        6.1. Ф-ция считывания текста из R на основе п.1
+        6.2. Ф-ция создания R на основе checkboxes
+        6.3. Обработчик на каждое нажатие и изменение R
+        6.3. Обработчик на каждое изменение атрибутов для R
+
+
+        7. Выбрать checkboxes
+        
+        7.1. Ф-ция считывания отмеченных checkboxes
+        7.2. Ф-ция создания строки атрибутов для R на основе отмеченных checkboxes (п. 7.1.)
+        7.3. Обработчик ф-ции 7.1. на каждое изменение отмеченных checkboxes
+
+
+
+        3.1. Ф-ция добавления подсвечивающего тега к исходному тексту (не хардкодом), в зависимости от атрибутов
+        3.2. Ф-ция вставки подсвеченного текста (п. 3.1) в div с текстом
+
+
+        4.1 Ф-ция выделения фона инпута для ввода R и оповещения о необходимости ввести R
+
+
+        4. Ввести R
+
+        4.1. Ф-ция считывания текста из R на основе п.1
+        4.2. Ф-ция создания R на основе checkboxes
+        4.3. Обработчик на каждое нажатие и изменение R
+
+
+       
+
+
+
+        1. Ф-ция получения строки с атрибутами из выбранных checkboxes
+        2. Ф-ция Создание R на основе п.1
+        3. Обработчик на каждое нажатие и изменение R
+        4. Обработчик на каждое изменение checkboxes
+        5. Ф-ция вставки в текст тегов в найденные участки текста
+        6. Ф-ция добавления текста из инпута для ввода
+        */
+
+
+
+        // 2.1. Обработчик по нажатию на кнопку добавление текста, создания тега div с текстом из инпута (обработчик ф - ции из 3.1)
+
+        function getText(idInputText)
+        {
+            let input = document.getElementById(idInputText);
+                        
+
+            if (input.tagName == "INPUT")
+            {
+                return input.value;
+            }
+            else
+            {
+                return "You entered incorrect idInputText = " + idInputText;
+            }
+        }
+
+
+        // 2.2. Ф-ция очищения текста из формы для ввода текста 
+
+        function clearTextInput(idInputText)
+        {
+            let input = 
+        }
+
+
+        //////////////////////// text
+
+        //// +
+        //function onSendTextButton() {
+        //    let input = document.getElementById("idTextInput");
+        //    let textInput = input.value;
+        //    input.value = "";
+
+        //    createText(textInput, getRegexValue());// insert text in html page
+
+        //    return textInput;
+        //}
+
+        //function handlerText()
+        //{
+        //    let buttonSendText = document.getElementById("idSendTextButton");
+        //    buttonSendText.addEventListener("click", onSendTextButton);
+        //}
+
+        
+
+        //// create text
+        //function createText(someText, patternText) {
+        //    deleteDivTextElement();//++
+
+        //    let div = document.createElement("div");
+        //    div.setAttribute("id", "idInsertedTextToDiv");
+
+        //    let position = someText.indexOf(patternText);
+
+        //    someText = replaceAllOccurences(someText, patternText);
+        //    someText = someText.replace(/\n\r?/g, '</br>');// replace all /n to </br>
+
+        //    div.innerHTML = someText;
+
+        //    let checkboxes = document.getElementById("idCheckboxes");
+
+        //    checkboxes.insertAdjacentElement("afterend", div);
+        //}
+
+
+
+        //////////////////////// regex
+
+
+        //function getRegexValue()
+        //{
+        //    let input = document.getElementById("idRegexInput");
+        //    let regexValue = input.value;
+
+        //    return regexValue;
+        //}
+
+
+        //// create Regex from input with some attributes
+        //function createRegex(textRegex)
+        //{
+        //    let attributesToString = getInputsRegexAttributes(idDivRegex);
+            
+        //    let newRegex = new RegExp("(" + textRegex + ")", attributesToString);
+
+        //    if (textRegex[0] == "(" & textRegex[textRegex.length - 1] == ")")
+        //    {
+        //        newRegex = new RegExp(textRegex, attributesToString);
+        //    }
+            
+        //    return newRegex
+        //}
+
+
+        //// Get all inputs for Regex
+        //function getInputsRegexAttributes(idDivRegex)
+        //{
+        //    let divCheckboxes = document.getElementById(idDivRegex);
+        //    let children = divCheckboxes.childNodes;
+
+        //    let states = [];
+
+        //    for (let i = 0; i < children.length; i++)
+        //    {
+        //        if (children[i].tagName == "INPUT" && children[i].checked)
+        //        {
+        //            let letter = children[i].getAttribute("data-letter");
+        //            states.push(letter);                        
+        //        }
+        //    }
+
+        //    let attributes = states.join('');
+
+        //    return attributes ;
+        //}
+
+
+        //// get states of inputs
+
+
+
+        //function onRegexChanged()
+        //{
+        //    let inputRegex = document.getElementById("idRegexInput");
+
+        //    return inputRegex.value;
+        //}
+
+
+        //function handlerRegex()
+        //{
+        //    let inputRegex = document.getElementById("idRegexInput");
+
+        //    inputRegex.addEventListener(onkeypress, onRegexChanged);
+        //}
+
+
+        //function getInputValue(id) // replace with this function
+        //{
+        //    let input = document.getElementById(id);
+
+        //    return input.value;
+        //}
+        
+        //function deleteDivTextElement() {
+        //    let textElement = document.getElementById("idInsertedTextToDiv");
+
+        //    if (textElement != undefined) {
+        //        textElement.remove();
+        //    }
+        //}
+
+        //function replaceAllOccurences(text, regex)
+        //{
+        //    // modfy according to createRegex(textRegex, ...attributtes)
+        //    let newRegex = new RegExp("(" + regex + ")", 'g');
+
+        //    if (regex[0] == "(" & regex[regex.length - 1] == ")")
+        //    {
+        //        newRegex = new RegExp(regex, 'g');
+        //    } 
+
+        //    let newString = text.replace(newRegex, "<span class='red'>" + '$1' + "</span>");
+
+
+        //    return newString;
+        //}
+
+
+
+
+        //handlerText();
+
+        //getInputsRegexAttributes("idCheckboxes"); // for check        
+
+        //createRegex("a", getCheckboxesRegex("idCheckboxes")); // for check
+
+
+    </script>
+
+
+
+</body>
+</html>
