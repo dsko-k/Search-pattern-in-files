@@ -1,0 +1,11 @@
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\bin\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.exe
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\bin\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.deps.json
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\bin\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.runtimeconfig.json
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\bin\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.runtimeconfig.dev.json
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\bin\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.dll
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\bin\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.pdb
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\obj\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.csprojAssemblyReference.cache
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\obj\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.AssemblyInfoInputs.cache
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\obj\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.AssemblyInfo.cs
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\obj\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.dll
+E:\Программирование\Мои программы\Search_files_with_regex_JavaScript\obj\Debug\netcoreapp3.1\Search_files_with_regex_JavaScript.pdb
